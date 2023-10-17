@@ -10,7 +10,11 @@ import java.sql.SQLException;
 public class DBConnection {
 
 	public static void main(String[] args) {	
-	
+			//selectBank();
+			selectKhcafe();
+	}
+	static void selectBank() {
+		
 		// 1. 드라이버 연결 : Oracle JDBC 드라이버 클래스 이름
 		String driver = "oracle.jdbc.driver.OracleDriver";
 		// 2. 오라클 내 컴퓨터 연결 : 데이터 베이스 연결 정보
@@ -51,5 +55,35 @@ public class DBConnection {
 		}
 
 	}
-
+	static void selectKhcafe() {	// 1. 드라이버 연결 : Oracle JDBC 드라이버 클래스 이름
+		String driver = "oracle.jdbc.driver.OracleDriver";
+		// 2. 오라클 내 컴퓨터 연결 : 데이터 베이스 연결 정보
+		//                               나의IP주소:port번호
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String user = "khcafe";
+		String password = "kh1234";
+		Connection con = null;
+		try {
+			con = DriverManager.getConnection(url, user, password);
+			System.out.println("데이터베이스 연결 성공!");
+			//select * from menu 작성해서 menu table 가져오기
+			String selectQuery = "SELECT * FROM MENU";
+			PreparedStatement selectState = con.prepareStatement(selectQuery);
+			ResultSet result = selectState.executeQuery();
+			while(result.next()) {
+				int menuID = result.getInt("menu_id");
+				int cafeID = result.getInt("cafe_id");
+				String menuName = result.getString("menu_name");
+				double price = result.getDouble("price");
+				String description = result.getString("description");
+				
+				System.out.println("MENU_ID : " + menuID + "  CAFE_ID : " + cafeID + "  MENU_NAME : " + menuName + "  PRICE : " + price + "  DESCRIPTION : " + description);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
 }

@@ -12,7 +12,8 @@ public class DBConnection {
 	public static void main(String[] args) {	
 			//selectBank();
 			//selectKhcafe();
-			selectIf();
+			//selectIf();
+			insertBank();
 	}
 	static void selectBank() {
 		
@@ -58,6 +59,7 @@ public class DBConnection {
 		}
 
 	}
+	
 	static void selectKhcafe() {	
 		String driver = "oracle.jdbc.driver.OracleDriver";
 		
@@ -88,6 +90,7 @@ public class DBConnection {
 		
 		
 	}
+	
 	static void selectIf() {
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String user = "khabank";
@@ -138,7 +141,43 @@ public class DBConnection {
 			e.printStackTrace();
 		}
 	}
+	
+	static void insertBank() {
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String user = "khabank";
+		String password = "kh1234";
+		try {
+			Connection con = DriverManager.getConnection(url, user, password);
+			String insertQuery = "INSERT INTO BANK (account_id, account_number, account_name, balance, branch_name, last_transaction_date)"
+					+"VALUES(?, ?, ?, ?, ?, ?)";
+			PreparedStatement insertState = con.prepareStatement(insertQuery);
+			/*insertState.setInt(1, 13);
+			insertState.setString(2,"110-445-561432");
+		    insertState.setString(3,"사자");
+		    insertState.setDouble(4,1500.00);
+		    insertState.setString(5, "kh");
+		    insertState.setDate(6, Date.valueOf("2023-10-16"));
+			insertState.setInt(1, 12);
+			insertState.setString(2, "110-332-455066");
+			insertState.setString(3, "코끼리");
+			insertState.setDouble(4,700.25);
+			insertState.setString(5,"중앙지점");
+			insertState.setDate(6,Date.valueOf("2023-10-10"));*/
+			
+			insertState.setInt(1, 11);
+			insertState.setString(2, "110-544-120345");
+			insertState.setString(3, "기린");
+			insertState.setDouble(4, 1500.50);
+			insertState.setString(5, "남쪽지점");
+			insertState.setDate(6, Date.valueOf("2023-10-12"));
+			
+		    int rowsInsert = insertState.executeUpdate();
+		    System.out.println(rowsInsert + "row 추가됨");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
+	}
 }
 		
 		

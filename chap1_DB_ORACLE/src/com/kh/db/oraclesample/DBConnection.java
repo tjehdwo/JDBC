@@ -118,7 +118,7 @@ public class DBConnection {
 		String[] targetB = {"5500.00","3300.00"};
 		selectState.setString(1,targetB[0]);
 		selectState.setString(2,targetB[1]);
-		ResultSet result = selectState.executeQuery();
+		ResultSet result = selectState.executeQuery();//주석
 		
 		if (!result.isBeforeFirst()) {
 			System.out.println("존재하는 데이터가 없습니다.");

@@ -11,7 +11,8 @@ public class DBConnection {
 
 	public static void main(String[] args) {	
 			//selectBank();
-			selectKhcafe();
+			//selectKhcafe();
+			selectIf();
 	}
 	static void selectBank() {
 		
@@ -46,7 +47,9 @@ public class DBConnection {
 				String branchName = result.getString("branch_name");
 				//3. java.sql import Date lastTransactionDate 가져오기
 				Date lastTransactionDate = result.getDate("last_transaction_date");
-				System.out.println("ACCOUNT_ID : " + accountID + "  ACCOUNT_NAME : " + accountName + "  balance : " + balance + "  ACCOUNT_NUMBER : " + accountNumber + "  BRANCHNAME : " + branchName + "  LAST_TRANSACTION_DATE : " + lastTransactionDate);
+				System.out.println("ACCOUNT_ID : " + accountID + "  ACCOUNT_NAME : " + accountName + 
+						"  balance : " + balance + "  ACCOUNT_NUMBER : " + accountNumber + "  BRANCHNAME : "
+						+ branchName + "  LAST_TRANSACTION_DATE : " + lastTransactionDate);
 				
 			}
 			
@@ -85,4 +88,59 @@ public class DBConnection {
 		
 		
 	}
+	static void selectIf() {
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String user = "khabank";
+		String password = "kh1234";
+		Connection con = null;
+	
+	try {
+		con = DriverManager.getConnection(url, user, password);
+		System.out.println("연결 성공");
+		/*where절 사용하여 조건추가
+		String selectQuery = "SELECT * FROM BANK WHERE account_id in (?,?)";
+		String selectQuery = "SELECT * FROM BANK WHERE account_number in (?,?)";
+		PreparedStatement selectState = con.prepareStatement(selectQuery);
+		String[] targetAN = {"110-449-067680","110-332-405955"};
+		selectState.setString(1, targetAN[0]);
+		selectState.setString(2, targetAN[1]);
+		ResultSet result = selectState.executeQuery();
+		
+		String selectQuery = "SELECT * FROM BANK WHERE account_name in (?,?)";
+		PreparedStatement selectState = con.prepareStatement(selectQuery);
+		String[] targetAN = {"김유민","김철준"};
+		selectState.setString(1,targetAN[0]);
+		selectState.setString(2,targetAN[1]);
+		ResultSet result = selectState.executeQuery();*/
+		
+		String selectQuery = "SELECT * FROM BANK WHERE balance in (?,?)";
+		PreparedStatement selectState = con.prepareStatement(selectQuery);
+		String[] targetB = {"5500.00","3300.00"};
+		selectState.setString(1,targetB[0]);
+		selectState.setString(2,targetB[1]);
+		ResultSet result = selectState.executeQuery();
+		
+		if (!result.isBeforeFirst()) {
+			System.out.println("존재하는 데이터가 없습니다.");
+		}
+		
+		 while(result.next()) {
+			int a = result.getInt("account_id");
+			String b = result.getString("account_number");
+			String c = result.getString("account_name");
+			double d = result.getDouble("balance");
+			String e = result.getString("branch_name");
+			Date f = result.getDate("last_transaction_date");
+			System.out.println("ACCOUNT_ID : " + a + "  ACCOUNT_NUMBER : " + b +"  ACCOUNT_NAME : " + c + "  BALANCE : " + d + "  BRANCH_NAME : " + e+ "  LAST_TRANSACTION_DATE : " + f);
+		 }
+		 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+		
 }
+		
+		
+	
+

@@ -55,10 +55,9 @@ public class DBConnection {
 		}
 
 	}
-	static void selectKhcafe() {	// 1. 드라이버 연결 : Oracle JDBC 드라이버 클래스 이름
+	static void selectKhcafe() {	
 		String driver = "oracle.jdbc.driver.OracleDriver";
-		// 2. 오라클 내 컴퓨터 연결 : 데이터 베이스 연결 정보
-		//                               나의IP주소:port번호
+		
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String user = "khcafe";
 		String password = "kh1234";
@@ -67,7 +66,7 @@ public class DBConnection {
 			con = DriverManager.getConnection(url, user, password);
 			System.out.println("데이터베이스 연결 성공!");
 			//select * from menu 작성해서 menu table 가져오기
-			String selectQuery = "SELECT * FROM MENU";
+			String selectQuery = "SELECT * FROM MENU WHERE DESCRIPTION LIKE '%진짜%' ORDER BY PRICE DESC";
 			PreparedStatement selectState = con.prepareStatement(selectQuery);
 			ResultSet result = selectState.executeQuery();
 			while(result.next()) {

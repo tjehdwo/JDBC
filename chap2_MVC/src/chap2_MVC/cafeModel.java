@@ -78,9 +78,20 @@ public class cafeModel {
 			st.setInt(1, menuId);
 			st.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void deleteOrders(int orderId) {
+		try {
+			Connection con = DriverManager.getConnection(url,username,password);
+			String sql = "DELETE FROM ORDERS WHERE ORDER_ID = ?";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setInt(1, orderId);
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

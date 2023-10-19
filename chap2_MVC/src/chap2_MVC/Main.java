@@ -8,10 +8,11 @@ public class Main {
 		//controller
 		cafeController controller = new cafeController(model,view);
 		
-		view.addCafeName();
+		//view.addCafeName();
 		//view.updateMenu();
 		//view.updateCafe();
 		//view.deleteCafe();
 		//view.deleteMenu();
+		view.deleteOrders();
 	}
 }

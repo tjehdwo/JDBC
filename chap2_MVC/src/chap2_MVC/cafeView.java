@@ -92,4 +92,15 @@ public class cafeView {
 		
 		
 	}
+
+	public void deleteOrders() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("삭제할 ORDERS의 ID를 입력하세요.");
+		
+		System.out.println("ORDERS ID : ");
+		int orderId = Integer.parseInt(sc.nextLine());
+		
+		model.deleteOrders(orderId);
+		System.out.println("ORDERS가 성공적으로 삭제되었습니다.");
+	}
 }

@@ -105,4 +105,14 @@ public class cafeView {
 	
 	
 	}
+
+	public void selectCafe() {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("(  )미만의 가격인 메뉴 조회. ");
+		double price = sc.nextDouble();
+		
+		
+		model.selectCafe(price);
+	}
 }

@@ -22,7 +22,8 @@ public class cafeController {
 		System.out.println("3.카페 영업시간 수정");
 		System.out.println("4.카페 정보 삭제");
 		System.out.println("5.메뉴 정보 삭제");
-		System.out.println("6.종료.");
+		System.out.println("6.메뉴 가격 조회");
+		System.out.println("7.종료.");
 		System.out.println("원하는 직업을 선택해주세요.");
 		
 		int choice = sc.nextInt(); 
@@ -48,6 +49,10 @@ public class cafeController {
 			isTrue = false;
 			break;
 		case 6:
+			view.selectCafe();
+			isTrue = false;
+			break;
+		case 7:
 			System.out.println("프로그램을 종료합니다.");
 			isTrue = false;
 			break;

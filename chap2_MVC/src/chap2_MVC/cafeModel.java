@@ -3,6 +3,7 @@ package chap2_MVC;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import oracle.sql.DATE;
@@ -94,6 +95,33 @@ public class cafeModel {
 			st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void selectCafe(double price) {
+		boolean isTrue = true;
+		while(isTrue) {
+		try {
+			Connection con = DriverManager.getConnection(url,username,password);
+			String sql = "SELECT menu_name FROM MENU WHERE PRICE < ?";
+			PreparedStatement st = con.prepareStatement(sql);
+			
+			st.setDouble(1, price);
+			ResultSet result = st.executeQuery();
+			
+		while(result.next()) {
+			int menuID = result.getInt("menu_id");
+			int cafeID = result.getInt("cafe_id");
+			String menuName = result.getString("menu_name");
+			double p = result.getDouble("price");
+			String description = result.getString("description");
+		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}if(!isTrue) {
+			System.out.println("조회할 정보가 없습니다.");
+		}
+		break;
 		}
 	}
 }

@@ -101,6 +101,8 @@ public class cafeView {
 		int orderId = Integer.parseInt(sc.nextLine());
 		
 		model.deleteOrders(orderId);
-		System.out.println("ORDERS가 성공적으로 삭제되었습니다.");
+		
+	
+	
 	}
 }

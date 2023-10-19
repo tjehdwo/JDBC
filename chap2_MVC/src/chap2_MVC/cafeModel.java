@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import oracle.sql.DATE;
+
 public class cafeModel {
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String username = "khcafe";

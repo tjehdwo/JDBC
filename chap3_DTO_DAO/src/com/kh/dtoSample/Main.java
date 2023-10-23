@@ -24,8 +24,9 @@ public class Main {
 			
 			//카페 정보 표시하는 메서드 가져오기
 			controller.displayALLCafeS();
-
+			
 			//connection.close();
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

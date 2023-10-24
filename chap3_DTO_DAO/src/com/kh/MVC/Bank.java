@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Bank {
 
 	public static void main(String[] args) {
-		String url = "jdvc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String name = "khabank";
 		String pw = "kh1234";
 		
@@ -26,14 +26,15 @@ public class Bank {
 			System.out.println("전송할 금액을 입력하세요.");
 			double amount = sc.nextDouble();
 			
-			PreparedStatement a = c.prepareStatement("UPDATE BANK SET balance = balance - ? WHERE account = ?");
+			c.setAutoCommit(false);//트랜잭션 시작
+			PreparedStatement a = c.prepareStatement("UPDATE BANK SET balance = balance - ? WHERE account_id = ?");
 			a.setDouble(1, amount);
 			a.setInt(2, fromAccountId);
 			a.executeUpdate();
 			c.commit();
 			
 			
-			PreparedStatement b = c.prepareStatement("UPDATE BANK SET balance = balance + ? WHERE account = ?");
+			PreparedStatement b = c.prepareStatement("UPDATE BANK SET balance = balance + ? WHERE account_id = ?");
 			b.setDouble(1, amount);
 			b.setInt(2, toAccountId);
 			b.executeUpdate();
